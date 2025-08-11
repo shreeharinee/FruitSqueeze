@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fresh Squeeze — Menu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="brand">FRESH SQUEEZE</div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="cart.html">Cart <span id="cart-badge" class="cart-badge">0</span></a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2 class="page-title">Our Full Menu</h2>
+
+    <!-- Section: Fresh Juice -->
+    <section class="menu-section">
+      <button class="menu-toggle">Fresh Juice</button>
+      <div class="menu-list">
+        <div class="menu-grid">
+          <div class="menu-card">
+            <img src="https://tse1.mm.bing.net/th/id/OIP.K9_T8BODR_8HjC12Lsc3jgHaE-?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Orange Juice">
+            <h4>Orange Juice</h4>
+            <div class="price">₹60.00</div>
+            <button onclick="addToCart('Orange Juice',60,'https://tse1.mm.bing.net/th/id/OIP.K9_T8BODR_8HjC12Lsc3jgHaE-?rs=1&pid=ImgDetMain&o=7&rm=3')">Add to Cart</button>
+          </div>
+
+          <div class="menu-card">
+            <img src="https://tse4.mm.bing.net/th/id/OIP.f-mcDgq49wpFx7hWOB2SQQAAAA?w=428&h=642&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Green Detox">
+            <h4>Green Detox</h4>
+            <div class="price">₹150.00</div>
+            <button onclick="addToCart('Green Detox',150,'https://tse4.mm.bing.net/th/id/OIP.f-mcDgq49wpFx7hWOB2SQQAAAA?w=428&h=642&rs=1&pid=ImgDetMain&o=7&rm=3')">Add to Cart</button>
+          </div>
+
+          <div class="menu-card">
+            <img src="https://img.freepik.com/premium-photo/fresh-pineapple-juice-hd-8k-wallpaper-stock-photographic-image_677426-7089.jpg" alt="Pineapple Punch">
+            <h4>Pineapple Punch</h4>
+            <div class="price">₹170.00</div>
+            <button onclick="addToCart('Pineapple Punch',170,'https://img.freepik.com/premium-photo/fresh-pineapple-juice-hd-8k-wallpaper-stock-photographic-image_677426-7089.jpg')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Milkshakes -->
+    <section class="menu-section">
+      <button class="menu-toggle">Milkshakes</button>
+      <div class="menu-list">
+        <div class="menu-grid">
+          <div class="menu-card">
+            <img src="https://img.freepik.com/premium-photo/berry-bliss-healthy-smoothie-glass_1077802-45679.jpg" alt="Berry Blast">
+            <h4>Berry Blast</h4>
+            <div class="price">₹100.00</div>
+            <button onclick="addToCart('Berry Blast',100,'https://img.freepik.com/premium-photo/berry-bliss-healthy-smoothie-glass_1077802-45679.jpg')">Add to Cart</button>
+          </div>
+
+          <div class="menu-card">
+            <img src="https://tse3.mm.bing.net/th/id/OIP.14BgA_agK8t2tsFdgPfHgAHaE7?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Strawberry Shake">
+            <h4>Strawberry Shake</h4>
+            <div class="price">₹150.00</div>
+            <button onclick="addToCart('Strawberry Shake',150,'https://tse3.mm.bing.net/th/id/OIP.14BgA_agK8t2tsFdgPfHgAHaE7?rs=1&pid=ImgDetMain&o=7&rm=3')">Add to Cart</button>
+          </div>
+
+          <div class="menu-card">
+            <img src="https://img.freepik.com/premium-photo/fresh-smoothie-mango-lassi-with-mango-fruit-studio-background-restaurant-with-garden_741910-7268.jpg?w=740" alt="Mango Lassi Shake">
+            <h4>Mango Lassi Shake</h4>
+            <div class="price">₹110.00</div>
+            <button onclick="addToCart('Mango Lassi Shake',110,'https://img.freepik.com/premium-photo/fresh-smoothie-mango-lassi-with-mango-fruit-studio-background-restaurant-with-garden_741910-7268.jpg?w=740')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Ice Cream Added Juice -->
+    <section class="menu-section">
+      <button class="menu-toggle">Ice Cream Added Juice</button>
+      <div class="menu-list">
+        <div class="menu-grid">
+          <div class="menu-card">
+            <img src="https://ds393qgzrxwzn.cloudfront.net/cat1/img/images/0/lB6uNny4nL.jpg" alt="Kulfi Mango Blend">
+            <h4>Kulfi Mango Blend</h4>
+            <div class="price">₹130.00</div>
+            <button onclick="addToCart('Kulfi Mango Blend',130,'https://ds393qgzrxwzn.cloudfront.net/cat1/img/images/0/lB6uNny4nL.jpg')">Add to Cart</button>
+          </div>
+
+          <div class="menu-card">
+            <img src="https://hips.hearstapps.com/del.h-cdn.co/assets/16/47/1600x800/landscape-1479775067-delish-hot-chocolate-float-1.jpg?resize=1200:*" alt="Chocolate Float">
+            <h4>Chocolate Float</h4>
+            <div class="price">₹140.00</div>
+            <button onclick="addToCart('Chocolate Float',140,'https://hips.hearstapps.com/del.h-cdn.co/assets/16/47/1600x800/landscape-1479775067-delish-hot-chocolate-float-1.jpg?resize=1200:*')">Add to Cart</button>
+          </div>
+
+          <div class="menu-card">
+            <img src="https://rare-gallery.com/uploads/posts/350493-4k-wallpaper.jpg" alt="Berry Cream Chill">
+            <h4>Berry Cream Chill</h4>
+            <div class="price">₹120.00</div>
+            <button onclick="addToCart('Berry Cream Chill',120,'https://rare-gallery.com/uploads/posts/350493-4k-wallpaper.jpg')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js">
+    
+  </script>
+</body>
+</html>

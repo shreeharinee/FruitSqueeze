@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fresh Squeeze — Login</title>
+  <style>
+    :root{
+      --accent:#ff6b00;
+      --bg: linear-gradient(135deg,#ffb347,#ffcc33);
+      --card-bg:#fff;
+      --muted:#666;
+      --radius:12px;
+      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    }
+    html,body{height:100%;margin:0;}
+    body{
+      display:flex;align-items:center;justify-content:center;
+      background: var(--bg);
+    }
+    .card{
+      width:360px;
+      background:var(--card-bg);
+      border-radius:var(--radius);
+      box-shadow:0 12px 40px rgba(0,0,0,0.18);
+      padding:22px;
+      color:#111;
+    }
+    .brand{ color:var(--accent); font-weight:800; letter-spacing:0.06em; text-align:center; margin-bottom:10px;}
+    h2{ text-align:center; margin:8px 0 14px; }
+    .tabs{ display:flex; gap:8px; justify-content:center; margin-bottom:12px; }
+    .tab{ padding:8px 14px; border-radius:999px; cursor:pointer; font-weight:700; color:var(--muted); background:#f7f7f7; }
+    .tab.active{ background:linear-gradient(90deg,#ff6b00,#ff8c2b); color:white; }
+    form{ display:flex; flex-direction:column; gap:10px; }
+    input{ padding:10px 12px; border-radius:8px; border:1px solid #e7e7e7; font-size:0.95rem; }
+    input:focus{ outline:none; box-shadow:0 6px 18px rgba(255,107,0,0.12); border-color:var(--accent); }
+    .small{ font-size:0.9rem; color:var(--muted); text-align:center; margin-top:6px; }
+    button.primary{
+      margin-top:6px;
+      padding:10px 12px; background:var(--accent); color:white; border:none; border-radius:10px; font-weight:800; cursor:pointer;
+    }
+    .hint{ font-size:0.85rem; color:#999; text-align:center; margin-top:8px; }
+    .error{ color:#b00020; font-size:0.9rem; text-align:center; }
+    .footer-links{ text-align:center; margin-top:8px; font-size:0.9rem; color:var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="card" role="main">
+    <div class="brand">FRESH SQUEEZE</div>
+
+    <div style="display:flex;flex-direction:column;align-items:center">
+      <h2 id="title">Login</h2>
+
+      <div class="tabs" role="tablist">
+        <div id="tab-login" class="tab active" role="tab">Login</div>
+        <div id="tab-signup" class="tab" role="tab">Sign up</div>
+      </div>
+    </div>
+
+    <div id="error" class="error" aria-live="polite" style="display:none"></div>
+
+    <form id="authForm" autocomplete="on">
+      <!-- signup-only name field (hidden for login) -->
+      <input id="name" type="text" placeholder="Full name (for sign up)" style="display:none">
+
+      <input id="email" type="email" placeholder="Email" required>
+      <input id="password" type="password" placeholder="Password (min 6 chars)" required>
+
+      <button type="submit" class="primary" id="submitBtn">Login</button>
+    </form>
+
+    <div class="hint">By continuing you agree to the demo terms.</div>
+    <div class="footer-links">
+      <a href="#" id="logoutLink" style="display:none;color:var(--accent);text-decoration:none;">Logout</a>
+    </div>
+  </div>
+
+<script>
+/*
+  Demo auth:
+  - Users saved in localStorage under key 'fs_users' as an object: { "[email]": {name, password} }
+  - Logged-in state: localStorage['fs_loggedIn']==='true' and fs_currentUser = email
+  - Supports ?return=page.html param to redirect after login
+  - This is a client-side demo only. Do NOT use this for production.
+*/
+
+(function(){
+  const params = new URLSearchParams(location.search);
+  const returnPage = params.get('return') ? decodeURIComponent(params.get('return')) : 'index.html';
+
+  // If already logged in, redirect to return page
+  if (localStorage.getItem('fs_loggedIn') === 'true') {
+    // small safety: if we are already on index and returnPage is login, avoid redirect loop
+    if (!location.pathname.endsWith('login.html')) {
+      location.href = returnPage;
+    }
+  }
+
+  // helpers
+  const $ = id => document.getElementById(id);
+  const tabLogin = $('tab-login'), tabSignup = $('tab-signup');
+  const title = $('title'), nameInput = $('name'), emailInput = $('email'), passwordInput = $('password');
+  const submitBtn = $('submitBtn'), errorEl = $('error'), logoutLink = $('logoutLink');
+  let mode = 'login'; // or 'signup'
+
+  function loadUsers(){
+    try { return JSON.parse(localStorage.getItem('fs_users') || '{}'); }
+    catch(e){ return {}; }
+  }
+  function saveUsers(u){ localStorage.setItem('fs_users', JSON.stringify(u)); }
+
+  function showError(msg){
+    if(!msg){ errorEl.style.display = 'none'; errorEl.textContent = ''; return; }
+    errorEl.style.display = 'block'; errorEl.textContent = msg;
+  }
+
+  function switchMode(m){
+    mode = m;
+    if(mode==='login'){
+      tabLogin.classList.add('active'); tabSignup.classList.remove('active');
+      title.textContent = 'Login';
+      nameInput.style.display = 'none';
+      submitBtn.textContent = 'Login';
+      showError();
+    } else {
+      tabSignup.classList.add('active'); tabLogin.classList.remove('active');
+      title.textContent = 'Sign up';
+      nameInput.style.display = 'block';
+      submitBtn.textContent = 'Create account';
+      showError();
+    }
+  }
+
+  tabLogin.addEventListener('click', ()=> switchMode('login'));
+  tabSignup.addEventListener('click', ()=> switchMode('signup'));
+
+  // form submit
+  document.getElementById('authForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    showError();
+    const email = emailInput.value.trim().toLowerCase();
+    const pwd = passwordInput.value;
+    const fullname = nameInput.value.trim();
+
+    if (!email || !pwd) { showError('Please enter email and password.'); return; }
+    if (pwd.length < 6) { showError('Password must be at least 6 characters.'); return; }
+    // basic email check
+    if (!/^\S+@\S+\.\S+$/.test(email)) { showError('Please enter a valid email.'); return; }
+
+    const users = loadUsers();
+
+    if (mode === 'signup') {
+      if (users[email]) { showError('An account with that email already exists. Please login.'); return; }
+      users[email] = { name: fullname || email.split('@')[0], password: pwd };
+      saveUsers(users);
+      // auto-login after signup
+      localStorage.setItem('fs_loggedIn', 'true');
+      localStorage.setItem('fs_currentUser', email);
+      // redirect
+      location.href = returnPage;
+    } else {
+      // login
+      if (!users[email] || users[email].password !== pwd) {
+        showError('Invalid email or password.');
+        return;
+      }
+      localStorage.setItem('fs_loggedIn', 'true');
+      localStorage.setItem('fs_currentUser', email);
+      location.href = returnPage;
+    }
+  });
+
+  // logout link (for testing, visible only if loggedIn)
+  logoutLink.addEventListener('click', (e)=>{
+    e.preventDefault();
+    localStorage.removeItem('fs_loggedIn');
+    localStorage.removeItem('fs_currentUser');
+    location.reload();
+  });
+
+  // show logout link if logged in (handy when testing)
+  if (localStorage.getItem('fs_loggedIn') === 'true') {
+    logoutLink.style.display = 'block';
+    logoutLink.textContent = 'Logout';
+  }
+
+  // init
+  switchMode('login');
+
+})();
+</script>
+</body>
+</html>

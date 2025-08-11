@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fresh Squeeze — Home</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <script>
+  (function(){
+    // pages that should be accessible without login (optional)
+    const publicPages = ['login.html'];
+    const path = location.pathname.split('/').pop() || 'index.html';
+    if (publicPages.includes(path)) return;
+
+    if (localStorage.getItem('fs_loggedIn') !== 'true') {
+      // redirect to login and preserve return page
+      const returnPage = encodeURIComponent(path);
+      location.href = 'login.html?return=' + returnPage;
+    }
+  })();
+</script>
+
+  <header class="nav">
+    <div class="brand">FRESH SQUEEZE</div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="cart.html">Cart <span id="cart-badge" class="cart-badge">0</span></a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-left">
+        <h1>Freshly Squeezed<br>Happiness</h1>
+        <p class="hero-sub">Organic fruits • No preservatives • Made to order</p>
+        <button class="hero-cta" onclick="location.href='menu.html'">ORDER NOW</button>
+
+        <!-- small featured heading -->
+        <div class="menu-heading">
+          <h2>Our Menu</h2>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <!-- juice image on the right -->
+        <img src="https://tse2.mm.bing.net/th/id/OIP.4vS6rtrSQnVAzUoG-hGFIAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3">
+      </div>
+    </section>
+
+    <!-- PRODUCT GRID (cards similar to screenshot) -->
+    <section class="product-grid-wrapper">
+      <div class="product-grid">
+        <!-- Card 1 -->
+        <article class="product-card">
+          <div class="card-img">
+            <img src="https://tse1.mm.bing.net/th/id/OIP.K9_T8BODR_8HjC12Lsc3jgHaE-?rs=1&pid=ImgDetMain&o=7&rm=3">
+          </div>
+          <div class="card-body">
+            <h3>Orange Juice</h3>
+            <p class="desc">Refreshing and rich in vitamin C</p>
+            <div class="price-cta">
+              <div class="price">₹60.00</div>
+              <button onclick="addToCart('Orange Juice',160,'https://tse1.mm.bing.net/th/id/OIP.K9_T8BODR_8HjC12Lsc3jgHaE-?rs=1&pid=ImgDetMain&o=7&rm=3')">ADD TO CART</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="product-card">
+          <div class="card-img">
+            <img src="https://img.freepik.com/premium-photo/berry-bliss-healthy-smoothie-glass_1077802-45679.jpg" alt="Berry Blast">
+          </div>
+          <div class="card-body">
+            <h3>Berry Blast</h3>
+            <p class="desc">A blend of mixed berries</p>
+            <div class="price-cta">
+              <div class="price">₹100.00</div>
+              <button onclick="addToCart('Berry Blast',200,'https://img.freepik.com/premium-photo/berry-bliss-healthy-smoothie-glass_1077802-45679.jpg')">ADD TO CART</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="product-card">
+          <div class="card-img">
+            <img src="https://tse2.mm.bing.net/th/id/OIP.ln4kWXF-j1xUy8zkqrnTdAAAAA?w=424&h=626&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Tropical Mix">
+          </div>
+          <div class="card-body">
+            <h3>Tropical Mix</h3>
+            <p class="desc">A mix of pineapple and mango</p>
+            <div class="price-cta">
+              <div class="price">₹120.00</div>
+              <button onclick="addToCart('Tropical Mix',220,'https://tse2.mm.bing.net/th/id/OIP.ln4kWXF-j1xUy8zkqrnTdAAAAA?w=424&h=626&rs=1&pid=ImgDetMain&o=7&rm=3')">ADD TO CART</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="product-card">
+          <div class="card-img">
+            <img src="https://tse4.mm.bing.net/th/id/OIP.f-mcDgq49wpFx7hWOB2SQQAAAA?w=428&h=642&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Green Detox">
+          </div>
+          <div class="card-body">
+            <h3>Green Detox</h3>
+            <p class="desc">A healthy green smoothie</p>
+            <div class="price-cta">
+              <div class="price">₹150.00</div>
+              <button onclick="addToCart('Green Detox',180,'https://tse4.mm.bing.net/th/id/OIP.f-mcDgq49wpFx7hWOB2SQQAAAA?w=428&h=642&rs=1&pid=ImgDetMain&o=7&rm=3')">ADD TO CART</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

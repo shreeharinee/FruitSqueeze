@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fresh Squeeze — Cart</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="brand">FRESH SQUEEZE</div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="cart.html">Cart <span id="cart-badge" class="cart-badge">0</span></a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container cart-page">
+    <h2 class="page-title">Your Cart</h2>
+
+    <div id="cart-items" class="cart-list">
+      <!-- JS will render cart rows here -->
+    </div>
+
+    <div class="cart-summary">
+      <div class="total-label">Total</div>
+      <div id="cart-total" class="total-value">₹0.00</div>
+    </div>
+
+    <!-- Checkout form below cart -->
+    <div class="checkout-box">
+      <h3>Checkout</h3>
+      <form id="checkout-form" onsubmit="event.preventDefault(); checkout();">
+        <input id="name" type="text" placeholder="Full Name" required>
+        <input id="address" type="text" placeholder="Delivery Address" required>
+        <input id="phone" type="tel" placeholder="Phone Number" required>
+        <select id="payment">
+          <option value="cod">Cash on Delivery</option>
+          <option value="card">Card (simulated)</option>
+        </select>
+        <button class="place-btn" type="submit">Place Order</button>
+      </form>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <button 
+  onclick="(function(){ 
+    localStorage.removeItem('fs_loggedIn'); 
+    localStorage.removeItem('fs_currentUser'); 
+    location.href='login.html'; 
+  })()" 
+  style="
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+  "
+  onmouseover="this.style.backgroundColor='#ff9800'"
+  onmouseout="this.style.backgroundColor='orange'">
+  Logout
+</button>
+
+
+</body>
+</html>

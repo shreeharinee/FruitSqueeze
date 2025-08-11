@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fresh Squeeze — Contact</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #ff9a3c, #ff6a00);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      color: #333;
+    }
+    .contact-container {
+      max-width: 600px;
+      background: white;
+      padding: 2rem;
+      margin: 3rem auto;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      text-align: center;
+    }
+    .contact-icon {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+    .contact-container h2 {
+      margin-bottom: 1rem;
+      color: #ff6a00;
+    }
+    .contact-container p {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      color: #666;
+    }
+    .contact-container form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .contact-container input,
+    .contact-container textarea {
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+    .contact-container input:focus,
+    .contact-container textarea:focus {
+      border-color: #ff6a00;
+      box-shadow: 0 0 5px rgba(255,106,0,0.5);
+      outline: none;
+    }
+    .contact-container textarea {
+      resize: none;
+      height: 120px;
+    }
+    .contact-container button {
+      padding: 0.8rem;
+      background: #ff6a00;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .contact-container button:hover {
+      background: #e65a00;
+    }
+    /* Floating next button */
+    .next-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ff6a00;
+      color: white;
+      padding: 0.8rem 1.2rem;
+      border-radius: 50px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+    }
+    .next-btn:hover {
+      background: #e65a00;
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="brand">FRESH SQUEEZE</div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="cart.html">Cart <span id="cart-badge" class="cart-badge">0</span></a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="contact-container">
+      <div class="contact-icon">🍹</div>
+      <h2>Contact Us</h2>
+      <p>We’d love to hear from you! Fill in the form below and our team will get back to you shortly.</p>
+      <form onsubmit="event.preventDefault(); alert('Message sent — we will contact you soon!'); this.reset();">
+        <input type="text" placeholder="Your name" required>
+        <input type="email" placeholder="Your email" required>
+        <textarea placeholder="Your message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Floating Next Button -->
+  <a href="index.html" class="next-btn">🏠 Home</a>
+
+  <script src="script.js"></script>
+  <button 
+  onclick="(function(){ 
+    localStorage.removeItem('fs_loggedIn'); 
+    localStorage.removeItem('fs_currentUser'); 
+    location.href='login.html'; 
+  })()" 
+  style="
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+  "
+  onmouseover="this.style.backgroundColor='#ff9800'"
+  onmouseout="this.style.backgroundColor='orange'">
+  Logout
+</button>
+
+
+</body>
+</html>
